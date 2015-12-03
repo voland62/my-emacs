@@ -1,5 +1,5 @@
-;; Well for now I write a switch which will be load the presets (curently live or prelude)
-;; by command line args. If no supplyed - loads vanilla Emacs.
+;;; Commentary: ---  Well for now I write a switch which will be load the presets (curently live or prelude)
+;;; by command line args. If no supplyed - loads vanilla Emacs.
 (set-face-attribute 'default (selected-frame) :height 120)
 
 (global-set-key [(control tab)] 'other-window)
@@ -19,9 +19,10 @@
 (global-set-key (kbd "C-c I") 'find-user-init-file)
 
 ;; --- smoth scrolling -------------------
-(add-to-list 'load-path "~/reps/sublimity/")
-(require 'sublimity)
-(require 'sublimity-scroll)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+;;(add-to-list 'load-path "~/reps/sublimity/")
+;;(require 'sublimity)
+;;(require 'sublimity-scroll)
 ;; (require 'sublimity-map)
 ;; (require 'sublimity-attractive)
 
