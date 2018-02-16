@@ -7,7 +7,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(set-face-attribute 'default (selected-frame) :height 120)
+(set-face-attribute 'default (selected-frame) :height 100)
 
 (global-set-key [(control tab)] 'other-window)
 
@@ -26,6 +26,8 @@
 (global-set-key (kbd "C-c I") 'find-user-init-file)
 
 ;; --- smoth scrolling -------------------
+(require 'smooth-scrolling)
+(smooth-scrolling-mode 1)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 ;;(add-to-list 'load-path "~/reps/sublimity/")
 ;;(require 'sublimity)
@@ -37,23 +39,38 @@
 (setq prelude-theme 'deeper-blue)
 (setq prelude-auto-save nil)
 
+
 ;; --- parse my command line args --------
 (add-to-list 'command-switch-alist
              (cons "--prelude"
                    (lambda (switch)
                      (load-file "~/reps/prelude/init.el")
                      (global-set-key [f8] 'neotree-toggle)
-		     ;; (load-file "~/.emacs.d/haskell-mode-setup.el")
+		     (load-file "~/reps/my-emacs/my-hask.el")
+                     (load-file "~/reps/my-emacs/my-ps.el")
+		   )))
+
+(add-to-list 'command-switch-alist
+             (cons "--intero"
+                   (lambda (switch)
+		     (load-file "~/reps/intero/elisp/intero.el")
+		     (add-hook 'haskell-mode-hook 'intero-mode)
+		     )))
+
+
+
+(add-to-list 'command-switch-alist
+             (cons "--ohai"
+                   (lambda (switch)
+                     (load-file "~/reps/ohai-emacs/init.el")
 		   )))
 
 (add-to-list 'command-switch-alist
              (cons "--spacemacs"
                    (lambda (switch)
-		     (add-to-list
-		      'package-archives
-		      '("melpa" . "http://melpa.org/packages/") t)
-		     (setq user-emacs-directory "~/reps/spacemacs/")
-                     (load-file "~/reps/spacemacs/init.el"))))
+		     ;; (setenv "HOME" (concat (getenv "HOME") "/reps/spacemacs"))
+                     ;; (load-file ".emacs.d/init.el")
+		     )))
 
 (add-to-list 'command-switch-alist
              (cons "--haskell"
@@ -79,7 +96,8 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (magit-popup crux which-key zop-to-char zenburn-theme yaml-mode web-mode volatile-highlights undo-tree swift-mode sublimity smex smartrep smartparens smart-mode-line scss-mode rainbow-mode rainbow-delimiters projectile ov operate-on-number neotree move-text markdown-mode+ magit json-mode js2-mode imenu-anywhere ido-ubiquitous hyde haskell-mode guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck flx-ido expand-region elm-mode elisp-slime-nav easy-kill discover-my-major diminish diff-hl company cider browse-kill-ring beacon anzu ace-window))))
+    (scss-mode yaml-mode web-mode json-mode js2-mode haskell-mode rainbow-mode elisp-slime-nav cider clojure-mode rainbow-delimiters company smex ido-ubiquitous flx-ido zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window smooth-scrolling smartparens neotree ada-mode)))
+ '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
