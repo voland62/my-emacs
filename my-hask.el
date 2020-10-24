@@ -8,8 +8,8 @@
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t))
 
-(custom-set-variables
- '(haskell-process-type 'stack-ghci))
+;;(custom-set-variables
+;; '(haskell-process-type 'stack-ghci))
 
 (setq haskell-compile-cabal-build-command "stack build")
 
